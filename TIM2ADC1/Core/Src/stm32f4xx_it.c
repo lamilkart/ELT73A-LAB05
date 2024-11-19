@@ -224,7 +224,8 @@ void ADC_IRQHandler(void)
   HAL_ADC_IRQHandler(&hadc1);
   /* USER CODE BEGIN ADC_IRQn 1 */
   adc1in1 = HAL_ADC_GetValue(&hadc1);
-  voltage = (adc1in1*3.3)/4095;
+  voltage = (adc1in1*3.3)/4095; 
+  TIM2->CCR1 = adc1in1;
   /* USER CODE END ADC_IRQn 1 */
 }
 
@@ -233,7 +234,7 @@ void ADC_IRQHandler(void)
   */
 void TIM2_IRQHandler(void)
 {
-  /* USER CODE BEGIN TIM2_IRQn 0 */ 
+  /* USER CODE BEGIN TIM2_IRQn 0 */
   HAL_ADC_Start_IT(&hadc1);
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
